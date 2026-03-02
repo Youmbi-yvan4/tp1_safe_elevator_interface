@@ -71,34 +71,34 @@ fn call_and_step_reaches_destination_and_opens_doors() {
      assert_eq!(status.queue, vec![4]);
  }
 
-// #[test]
-// fn duplicate_and_current_floor_calls_are_ignored() {
-//     let mut elevator = Elevator::new(1).expect("valid start floor");
+#[test]
+fn duplicate_and_current_floor_calls_are_ignored() {
+    let mut elevator = Elevator::new(1).expect("valid start floor");
 
-//     elevator.call(1).expect("same floor allowed");
-//     elevator.call(3).expect("call accepted");
-//     elevator.call(3).expect("duplicate ignored");
+    elevator.call(1).expect("same floor allowed");
+    elevator.call(3).expect("call accepted");
+    elevator.call(3).expect("duplicate ignored");
 
-//     assert_eq!(elevator.queue(), &[3]);
-// }
+    assert_eq!(elevator.queue(), &[3]);
+}
 
-// #[test]
-// fn close_doors_sets_direction_when_queue_exists() {
-//     let mut elevator = Elevator::new(2).expect("valid start floor");
+#[test]
+fn close_doors_sets_direction_when_queue_exists() {
+    let mut elevator = Elevator::new(2).expect("valid start floor");
 
-//     elevator.open_doors().expect("open doors from idle");
-//     elevator.call(5).expect("call accepted");
-//     elevator.close_doors().expect("close doors");
+    elevator.open_doors().expect("open doors from idle");
+    elevator.call(5).expect("call accepted");
+    elevator.close_doors().expect("close doors");
 
-//     assert_eq!(elevator.state(), State::MovingUp);
-// }
+    assert_eq!(elevator.state(), State::MovingUp);
+}
 
-// #[test]
-// fn step_with_empty_queue_returns_error() {
-//     let mut elevator = Elevator::new(0).expect("valid start floor");
+#[test]
+fn step_with_empty_queue_returns_error() {
+    let mut elevator = Elevator::new(0).expect("valid start floor");
 
-//     let result = elevator.step();
+    let result = elevator.step();
 
-//     assert_eq!(result, Err(ElevatorError::EmptyQueue));
-//     assert_eq!(elevator.state(), State::Idle);
-// }
+    assert_eq!(result, Err(ElevatorError::EmptyQueue));
+    assert_eq!(elevator.state(), State::Idle);
+}

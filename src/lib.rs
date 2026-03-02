@@ -22,6 +22,11 @@ pub struct Elevator {
     state: State,
     queue: Vec<u8>,
 }
+pub struct Status {
+    pub floor: u8,
+    pub state: State,
+    pub queue: Vec<u8>,
+}
 
 impl Elevator {
     pub fn new(start: u8) -> Result<Self, ElevatorError> {
@@ -48,8 +53,16 @@ impl Elevator {
         &self.queue
     }
 
-    pub fn status(&self) -> Elevator {
-        Elevator {
+    // pub fn status(&self) -> Elevator {
+    //     Elevator {
+    //         floor: self.floor,
+    //         state: self.state,
+    //         queue: self.queue.clone(),
+    //     }
+    // }
+
+    pub fn status(&self) -> Status {
+        Status {
             floor: self.floor,
             state: self.state,
             queue: self.queue.clone(),
@@ -131,8 +144,7 @@ impl Elevator {
         if self.floor < target {
             self.floor += 1;
             self.state = State::MovingUp;
-        }
-         else if self.floor > target {
+        } else if self.floor > target {
             self.floor -= 1;
             self.state = State::MovingDown;
         }
